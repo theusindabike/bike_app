@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
+import 'package:bike_app/services/world_time.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -8,24 +7,17 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-
-  void getTime() async {
-    Response response = await get(Uri.https('worldtimeapi.org', '/api/timezone/America/Sao_Paulo'));
-    Map data = jsonDecode(response.body);
-    //print(data);
-
-    String datetime = data['datetime'];
-    String offset = data['utc_offset'].substring(1,3);
-
-    DateTime now = DateTime.parse(datetime);
-    now = now.subtract(Duration(hours: int.parse(offset)));
-    print(now);
+  void setupWorldTime() async {
+    WorldTime instance = WorldTime(
+        location: 'Sao_Paulo', flag: 'brazil.png', url: 'America/Sao_Paulo');
+    await instance.getTime();
+    print(instance.time);
   }
 
   @override
   void initState() {
     super.initState();
-    getTime();
+    setupWorldTime();
   }
 
   @override

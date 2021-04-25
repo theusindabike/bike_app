@@ -5,7 +5,7 @@ import 'package:bike_app/pages/choose_location.dart';
 import 'package:bike_app/pages/income.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/home',
+  initialRoute: '/',
   routes: {
     '/': (context) => Loading(),
     '/home': (context) => Home(),
