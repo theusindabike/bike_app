@@ -12,18 +12,25 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     data = ModalRoute.of(context)!.settings.arguments as Map;
     print(data);
+
+    MaterialColor c = data['isDaytime'] ? Colors.amber : Colors.indigo;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
           child: Column(
             children: <Widget>[
-              ElevatedButton.icon(
+              TextButton.icon(
                   onPressed: () {
                     Navigator.pushNamed(context, '/location');
                   },
-                  icon: Icon(Icons.edit_location_alt_outlined),
-                  label: Text('Edit Location')),
+                  icon: Icon(
+                    Icons.edit_location_alt_outlined,
+                    color: Colors.grey[200],
+                  ),
+                  label: Text('Edit Location',
+                      style: TextStyle(color: Colors.grey[300]))),
               SizedBox(
                 height: 20.0,
               ),
@@ -34,6 +41,7 @@ class _HomeState extends State<Home> {
                       style: TextStyle(
                         fontSize: 28.0,
                         letterSpacing: 2.0,
+                        color: Colors.white,
                       ))
                 ],
               ),
@@ -42,6 +50,7 @@ class _HomeState extends State<Home> {
                 data['time'],
                 style: TextStyle(
                   fontSize: 66,
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -55,7 +64,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.redAccent,
         child: Icon(Icons.add),
       ),
-      backgroundColor: Colors.amber,
+      backgroundColor: c,
     );
   }
 }
